@@ -4,688 +4,417 @@
   <meta charset="UTF-8" />
   <title>张仑 | 个人主页</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
+    /* ===== 复古配色与全局设置 ===== */
     :root {
-      --bg: #050509;
-      --bg-alt: #0c0c12;
-      --card: rgba(20,20,30,0.92);
-      --card-soft: rgba(18,18,28,0.85);
-      --border-subtle: rgba(120,120,160,0.35);
-      --border-strong: rgba(180,180,220,0.55);
-      --text: #f5f5f7;
-      --subtext: #8f8fa3;
-      --accent: #2997ff;
-      --accent-2: #5af2c2;
-      --accent-soft: rgba(41,151,255,0.12);
-      --shadow-soft: 0 25px 60px rgba(0,0,0,0.6);
-      --shadow-small: 0 10px 30px rgba(0,0,0,0.45);
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --maxw: 1040px;
+      --bg-page: #f7f1e5;        /* 旧纸底色 */
+      --bg-paper: #fbf5e8;       /* 纸张主体 */
+      --border-paper: #d3c4aa;   /* 纸张边框 */
+      --ink: #3b3027;            /* 文字墨色 */
+      --ink-soft: #6f5c4d;       /* 次要文字 */
+      --accent: #a4642c;         /* 强调色 */
+      --accent-soft: #c3813f;    /* 强调浅色 */
+      --rule: #c9b89f;           /* 分割线颜色 */
+      --maxw: 880px;
     }
+
     * {
       box-sizing: border-box;
       -webkit-font-smoothing: antialiased;
     }
+
     body {
       margin: 0;
       padding: 0;
       background:
-        radial-gradient(circle at 10% -10%, #18203f 0, transparent 60%),
-        radial-gradient(circle at 80% 120%, #16382f 0, transparent 65%),
-        radial-gradient(circle at -20% 120%, #3b234e 0, transparent 60%),
-        var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-      system-ui, "PingFang SC", "Hiragino Sans GB",
-      "Microsoft YaHei", sans-serif;
-      line-height: 1.6;
+        radial-gradient(circle at 0% 0%, #f0e1c8 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #e4d2b8 0, transparent 60%),
+        var(--bg-page);
+      color: var(--ink);
+      font-family: "Times New Roman", "Georgia", "Songti SC",
+                   "STSong", "SimSun", serif;
+      line-height: 1.7;
     }
+
     a {
       color: var(--accent);
       text-decoration: none;
-      transition: color .18s ease, opacity .18s ease;
     }
     a:hover {
       text-decoration: underline;
-      color: #5fb1ff;
     }
 
-    /* 顶部导航：半透明 + 细线 + hover 下划线动画 */
+    /* ===== 顶部“书名条” ===== */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px);
-      background: radial-gradient(circle at 0 0, rgba(72,88,180,0.26), transparent 55%),
-                  linear-gradient(to bottom, rgba(8,8,14,0.96), rgba(8,8,14,0.78));
-      border-bottom: 1px solid rgba(120,120,160,0.55);
+      padding: 14px 16px 6px;
+      border-bottom: 1px solid #d0c0a6;
+      background: linear-gradient(to bottom, #f5ebdb, #f3e5cf);
+      box-shadow: 0 2px 4px rgba(120, 96, 70, 0.25);
     }
-    .nav-inner {
+    .header-inner {
       max-width: var(--maxw);
       margin: 0 auto;
-      padding: 8px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      font-size: 13px;
-      color: var(--subtext);
-    }
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #f5f5f7;
-    }
-    .nav-logo-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: conic-gradient(from 210deg, #5af2c2, #2997ff, #f5f5f7, #5af2c2);
-      box-shadow: 0 0 20px rgba(90,242,194,0.8);
-    }
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .nav-links a {
-      position: relative;
-      color: #f5f5f7;
-      opacity: .75;
-      text-decoration: none;
-      padding: 4px 0;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: -2px;
-      height: 1px; width: 0;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      transition: width .18s ease;
-    }
-    .nav-links a:hover {
-      opacity: 1;
-      text-decoration: none;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    @media (max-width: 720px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-links {
-        gap: 14px;
-      }
-    }
-
-    /* 布局容器 */
-    .container {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 26px 18px 70px;
-    }
-
-    /* Hero 区：大标题 + 渐变文字 + 光晕边框 */
-    .hero-wrapper {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 26px;
-      margin-top: 14px;
-      align-items: stretch;
-    }
-    @media (max-width: 880px) {
-      .hero-wrapper {
-        grid-template-columns: 1fr;
-      }
-    }
-    .hero-card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 28px 26px 26px;
-      background:
-        radial-gradient(circle at 0 0, rgba(90,242,194,0.12), transparent 60%),
-        radial-gradient(circle at 100% 0, rgba(41,151,255,0.16), transparent 60%),
-        var(--card-soft);
-      border: 1px solid rgba(200,200,255,0.2);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-    }
-    .hero-card::before {
-      /* 内部微妙高光边框 */
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(255,255,255,0.08);
-      pointer-events: none;
-      mix-blend-mode: screen;
-    }
-    .hero-title {
-      margin: 0 0 4px;
-      font-size: clamp(34px, 5vw, 42px);
-      font-weight: 650;
-      letter-spacing: .04em;
-      background: linear-gradient(120deg, #ffffff, #e0f0ff, #b9ffe8);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .hero-subtitle {
-      font-size: 17px;
-      color: #dadce7;
-      margin-bottom: 14px;
-    }
-    .hero-meta {
-      font-size: 13px;
-      color: var(--subtext);
-    }
-    .hero-meta span + span::before {
-      content: "•";
-      margin: 0 6px;
-      color: #5c5c72;
-    }
-    .hero-tagline {
-      margin-top: 18px;
-      font-size: 14.5px;
-      color: #f2f2fb;
-      max-width: 640px;
-    }
-
-    .badge-row {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .badge {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      padding: 4px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(180,180,240,0.5);
-      background: radial-gradient(circle at 0 0, rgba(90,242,194,0.3), transparent 55%),
-                  rgba(9,11,20,0.65);
-      color: #f5f5f7;
-    }
-    .badge-soft {
-      background: rgba(255,255,255,0.04);
-      border-color: rgba(180,180,240,0.4);
-      color: var(--subtext);
-    }
-
-    .hero-ribbon {
-      margin-top: 20px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(41,151,255,0.2), rgba(90,242,194,0.12));
-      border: 1px solid rgba(190,220,255,0.7);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      color: #f5f5f7;
-    }
-    .hero-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #5af2c2;
-      box-shadow: 0 0 14px rgba(90,242,194,0.9);
-    }
-
-    /* 右侧卡片：玻璃感联系信息 + 微动效 */
-    .side-card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 20px 20px 18px;
-      background:
-        radial-gradient(circle at 100% 0, rgba(41,151,255,0.22), transparent 60%),
-        rgba(9,10,18,0.76);
-      border: 1px solid rgba(160,170,230,0.4);
-      box-shadow: var(--shadow-small);
-      overflow: hidden;
-      transform-origin: center;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    .side-card::before {
-      content: "";
-      position: absolute;
-      width: 140%;
-      height: 140%;
-      left: -30%;
-      top: -60%;
-      background: radial-gradient(circle at 20% 0, rgba(255,255,255,0.12), transparent 55%);
-      opacity: .6;
-      pointer-events: none;
-    }
-    .side-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 46px rgba(0,0,0,0.7);
-      border-color: rgba(205,215,255,0.8);
-    }
-    .side-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #e7ecff;
-    }
-    .side-subtitle {
-      font-size: 12px;
-      color: var(--subtext);
-      margin-bottom: 10px;
-    }
-    .info-list {
-      margin-top: 8px;
-      font-size: 13px;
-    }
-    .info-row {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 6px 10px;
-      margin-bottom: 6px;
-    }
-    .info-key {
-      color: var(--subtext);
-    }
-    .info-value {
-      color: #f5f5f7;
-    }
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
-
-    /* 通用 section 标题 */
-    section {
-      margin-top: 32px;
-    }
-    .section-header {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 12px;
+      gap: 16px;
+      font-size: 14px;
     }
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: .06em;
+    .site-title {
+      font-size: 18px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--accent-soft);
+      border-bottom: 1px solid rgba(164, 100, 44, 0.35);
+      padding-bottom: 2px;
     }
-    .section-title span {
+    .site-sub {
       font-size: 13px;
-      font-weight: 400;
-      color: var(--subtext);
-      margin-left: 8px;
-      letter-spacing: 0;
-      text-transform: none;
-    }
-    .section-line {
-      flex: 1;
-      height: 1px;
-      margin-left: 16px;
-      background: linear-gradient(90deg, rgba(120,120,160,0.7), transparent);
-      opacity: .7;
+      color: var(--ink-soft);
+      font-style: italic;
+      text-align: right;
+      white-space: nowrap;
     }
 
-    /* 通用卡片 */
-    .panel {
-      border-radius: var(--radius-md);
-      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.04), transparent 55%),
-                  radial-gradient(circle at 100% 100%, rgba(90,242,194,0.1), transparent 55%),
-                  var(--card);
-      border: 1px solid var(--border-subtle);
-      padding: 18px 18px 16px;
-      box-shadow: 0 20px 36px rgba(0,0,0,0.5);
-    }
-
-    /* 教育经历：时间线样式 */
-    .timeline {
+    /* ===== 纸页容器 ===== */
+    .page-wrap {
+      max-width: var(--maxw);
+      margin: 24px auto 40px;
+      padding: 20px 18px 26px;
+      background: var(--bg-paper);
+      border-radius: 12px;
+      border: 1px solid var(--border-paper);
+      box-shadow:
+        0 12px 26px rgba(90, 70, 48, 0.28),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
       position: relative;
-      margin-top: 4px;
-      padding-left: 10px;
+      overflow: hidden;
     }
-    .timeline::before {
+    /* 纸张边缘的轻微“磨损”效果 */
+    .page-wrap::before,
+    .page-wrap::after {
       content: "";
       position: absolute;
-      left: 4px;
+      left: 0;
+      right: 0;
+      height: 14px;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+    .page-wrap::before {
       top: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(255,255,255,0.85),
+          rgba(255,255,255,0));
+    }
+    .page-wrap::after {
       bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, rgba(180,180,220,0.9), transparent);
-      opacity: .7;
+      background:
+        linear-gradient(to top,
+          rgba(210,190,160,0.6),
+          rgba(210,190,160,0));
     }
-    .timeline-item {
-      position: relative;
-      padding-left: 18px;
-      padding-bottom: 16px;
+
+    /* ===== 顶部名字 + 基本信息 ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 20px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 14px;
     }
-    .timeline-item:last-child {
-      padding-bottom: 4px;
+    @media (max-width: 780px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
     }
-    .timeline-dot {
-      position: absolute;
-      left: -1px;
-      top: 3px;
-      width: 9px; height: 9px;
-      border-radius: 999px;
-      background: #f5f5f7;
-      box-shadow: 0 0 12px rgba(255,255,255,0.9);
+
+    .hero-main {
+      padding-right: 8px;
     }
-    .timeline-title {
+
+    .name-line {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+    .name-cn {
+      font-size: 30px;
+      letter-spacing: 0.28em;
+      padding-left: 0.2em;
+    }
+    .name-en {
       font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--ink-soft);
+    }
+
+    .title-line {
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .intro {
+      margin-top: 10px;
+      font-size: 14px;
+      text-indent: 2em;
+    }
+
+    /* 侧边信息卡（性别/出生/联系方式） */
+    .hero-side {
+      border-left: 1px solid var(--rule);
+      padding-left: 14px;
+      font-size: 13px;
+    }
+    @media (max-width: 780px) {
+      .hero-side {
+        border-left: none;
+        border-top: 1px solid var(--rule);
+        padding-left: 0;
+        padding-top: 10px;
+      }
+    }
+
+    .small-heading {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 6px;
+    }
+    dl.info {
+      margin: 0;
+    }
+    dl.info dt {
+      float: left;
+      clear: left;
+      width: 5em;
+      color: var(--ink-soft);
+    }
+    dl.info dd {
+      margin: 0 0 4px 5em;
+    }
+
+    /* ===== 栏目标题 ===== */
+    .section {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--rule);
+      font-size: 14px;
+    }
+    .section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .section-title {
+      display: inline-block;
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--accent-soft);
+      padding-bottom: 2px;
+      color: var(--accent);
+    }
+    .section-sub {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-left: 8px;
+      font-style: italic;
+    }
+
+    /* 列表样式 */
+    ul.plain {
+      list-style: none;
+      padding-left: 0;
+      margin: 6px 0 0;
+    }
+    ul.plain li {
+      margin-bottom: 6px;
+    }
+
+    /* 教育经历为“条目列表” */
+    .edu-item {
+      margin-bottom: 6px;
+    }
+    .edu-degree {
       font-weight: 600;
     }
-    .timeline-meta {
-      font-size: 12px;
-      color: var(--subtext);
-      margin-top: 2px;
+    .edu-meta {
+      color: var(--ink-soft);
+      font-size: 13px;
     }
 
-    /* 研究领域 & 课程 */
-    .pill-row {
-      margin-bottom: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .pill {
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(180,180,230,0.5);
-      background: rgba(10,10,20,0.9);
-      color: #e7ebff;
-    }
-    .pill-soft {
-      border-color: rgba(140,140,200,0.6);
-      background: rgba(255,255,255,0.03);
-      color: var(--subtext);
-    }
-    ul.clean {
-      margin: 0;
-      padding-left: 18px;
-      font-size: 14px;
-    }
-    ul.clean li {
-      margin-bottom: 7px;
-    }
-
-    /* 发表论文：编号 + 细分行 */
-    .pub-list {
-      list-style: none;
-      margin: 4px 0 0;
+    /* 发表论文：编号 + 引文感 */
+    ol.pubs {
+      margin: 8px 0 0 1.6em;
       padding: 0;
       font-size: 14px;
     }
-    .pub-item {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(120,120,170,0.4);
-    }
-    .pub-item:last-child {
-      border-bottom: none;
-      padding-bottom: 2px;
-    }
-    .pub-index {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-    }
-    .pub-index span {
-      width: 22px; height: 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(200,200,250,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #f5f5f7;
-      background: radial-gradient(circle at 30% 0, rgba(255,255,255,0.3), transparent 60%),
-                  rgba(20,20,32,0.95);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.7);
+    ol.pubs li {
+      margin-bottom: 6px;
     }
     .pub-title {
-      font-weight: 500;
-      color: #f7f7ff;
+      font-weight: 600;
     }
     .pub-meta {
-      font-size: 12px;
-      color: var(--subtext);
-      margin-top: 3px;
+      color: var(--ink-soft);
+      font-size: 13px;
     }
 
+    /* 页脚 */
     footer {
-      padding: 18px 18px 26px;
+      max-width: var(--maxw);
+      margin: 0 auto 24px;
+      padding: 0 18px;
       font-size: 12px;
-      color: var(--subtext);
-      text-align: center;
-      border-top: 1px solid rgba(120,120,160,0.6);
-      margin-top: 30px;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(to top, rgba(5,6,12,0.9), transparent);
-    }
-
-    /* 小动画：淡入 */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInUp .55s ease forwards;
-    }
-    .fade-in.delay-1 { animation-delay: .08s; }
-    .fade-in.delay-2 { animation-delay: .16s; }
-    .fade-in.delay-3 { animation-delay: .24s; }
-    .fade-in.delay-4 { animation-delay: .32s; }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      color: var(--ink-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
     }
   </style>
 </head>
-<body>
 
+<body>
 <header>
-  <div class="nav-inner">
-    <div class="nav-brand">
-      <span class="nav-logo-dot"></span>
-      ZHANG LUN
-    </div>
-    <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#edu">Education</a>
-      <a href="#research">Research</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#pubs">Publications</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <div class="header-inner">
+    <div class="site-title">PERSONAL DOSSIER</div>
+    <div class="site-sub">Shandong University · Philosophy &amp; Social Development</div>
   </div>
 </header>
 
-<div class="container">
-  <!-- Hero -->
-  <section id="about" class="fade-in">
-    <div class="hero-wrapper">
-      <div class="hero-card">
-        <h1 class="hero-title">张仑</h1>
-        <div class="hero-subtitle">山东大学哲学与社会发展学院 · 数学哲学 & 元伦理学</div>
-        <div class="hero-meta">
-          <span>男</span><span>1992 年 7 月出生</span>
-        </div>
-        <p class="hero-tagline">
-          研究重心在于数学哲学与元伦理学，尤其关注数学对象与规范事实的本体论地位，
-          进化揭穿论证对数学与道德信念的挑战，以及形式模型如何与我们的规范性直觉对接。
-        </p>
-
-        <div class="badge-row">
-          <span class="badge">Mathematics & Normativity</span>
-          <span class="badge-soft">Philosophy of Mathematics</span>
-          <span class="badge-soft">Metaethics</span>
-        </div>
-
-        <div class="hero-ribbon">
-          <span class="hero-dot"></span>
-          <span>Current focus：</span>
-          <span style="opacity: .9;">
-            不可或缺性论证 · 进化揭穿论证 · 结构主义解释
-          </span>
-        </div>
+<main class="page-wrap">
+  <!-- 顶部基本信息 -->
+  <section class="hero" id="about">
+    <div class="hero-main">
+      <div class="name-line">
+        <div class="name-cn">张 仑</div>
+        <div class="name-en">ZHANG&nbsp;&nbsp;LUN</div>
       </div>
-
-      <aside class="side-card fade-in delay-1" id="contact">
-        <div class="side-title">Contact</div>
-        <div class="side-subtitle">山东大学 · 中心校区 · 知新楼 A 座</div>
-        <div class="info-list">
-          <div class="info-row">
-            <div class="info-key">办公地址</div>
-            <div class="info-value">
-              山东大学中心校区知新楼 A 座 1405
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-key">通信地址</div>
-            <div class="info-value">
-              山东省济南市历城区山大南路 27 号<br>
-              山东大学哲学与社会发展学院，邮编 250100
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-key">电子邮箱</div>
-            <div class="info-value mono">
-              <a href="mailto:lunzhang@sdu.edu.cn">lunzhang@sdu.edu.cn</a>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <div class="title-line">
+        山东大学哲学与社会发展学院　|　数学哲学 · 元伦理学
+      </div>
+      <p class="intro">
+        我的研究兴趣主要集中在数学哲学与元伦理学领域，关注数学对象与道德事实的本体论地位、
+        不可或缺性论证与进化揭穿论证，以及在结构主义视角下如何理解有限算术知识的性质与根据。
+      </p>
     </div>
+
+    <aside class="hero-side">
+      <div class="small-heading">基本信息</div>
+      <dl class="info">
+        <dt>性别</dt>
+        <dd>男</dd>
+        <dt>出生年月</dt>
+        <dd>1992年7月</dd>
+      </dl>
+
+      <div class="small-heading" style="margin-top: 10px;">联系方式</div>
+      <dl class="info">
+        <dt>办公地址</dt>
+        <dd>山东大学中心校区知新楼A座1405</dd>
+        <dt>通信</dt>
+        <dd>
+          山东省济南市历城区山大南路27号<br>
+          山东大学哲学与社会发展学院，邮编250100
+        </dd>
+        <dt>邮箱</dt>
+        <dd>
+          <a href="mailto:lunzhang@sdu.edu.cn">lunzhang@sdu.edu.cn</a>
+        </dd>
+      </dl>
+    </aside>
   </section>
 
   <!-- 教育经历 -->
-  <section id="edu" class="fade-in delay-2">
-    <div class="section-header">
-      <div class="section-title">Education <span>教育经历</span></div>
-      <div class="section-line"></div>
+  <section class="section" id="edu">
+    <div>
+      <span class="section-title">教育经历</span>
+      <span class="section-sub">Education</span>
     </div>
-    <div class="panel">
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-title">浙江大学 · 理学学士</div>
-          <div class="timeline-meta">2015 年</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-title">浙江大学 · 哲学博士</div>
-          <div class="timeline-meta">2022 年</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-title">美国哥伦比亚大学哲学系 · 联合培养博士生</div>
-          <div class="timeline-meta">2019–2021 年 · CSC 资助联合培养项目</div>
-        </div>
+    <div style="margin-top: 6px;">
+      <div class="edu-item">
+        <div class="edu-degree">浙江大学　理学学士</div>
+        <div class="edu-meta">2015年</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">浙江大学　哲学博士</div>
+        <div class="edu-meta">2022年</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">美国哥伦比亚大学哲学系　联合培养博士生</div>
+        <div class="edu-meta">2019–2021年，国家留学基金委（CSC）资助联合培养项目</div>
       </div>
     </div>
   </section>
 
   <!-- 研究领域 -->
-  <section id="research" class="fade-in delay-3">
-    <div class="section-header">
-      <div class="section-title">Research <span>主要研究领域</span></div>
-      <div class="section-line"></div>
+  <section class="section" id="research">
+    <div>
+      <span class="section-title">主要研究领域</span>
+      <span class="section-sub">Research Interests</span>
     </div>
-    <div class="panel">
-      <div class="pill-row">
-        <span class="pill">数学哲学</span>
-        <span class="pill">元伦理学</span>
-        <span class="pill pill-soft">数理逻辑</span>
-      </div>
-      <ul class="clean">
-        <li>
-          <strong>数学哲学：</strong>
-          探讨数学对象与数学真理的本体论与认识论基础，关注不可或缺性论证、结构主义视角下的算术知识等问题。
-        </li>
-        <li>
-          <strong>元伦理学：</strong>
-          研究道德事实与规范性理由的性质，特别是进化揭穿论证对道德与数学信念的挑战，以及相关的实在论/反实在论立场。
-        </li>
-      </ul>
-    </div>
+    <ul class="plain">
+      <li><strong>数学哲学：</strong>数学对象与数学真理的本体论、认识论地位；不可或缺性论证、结构主义等相关问题。</li>
+      <li><strong>元伦理学：</strong>道德事实与规范性理由的性质；进化揭穿论证对数学与道德信念的影响，以及道德实在论/反实在论之间的争论。</li>
+    </ul>
   </section>
 
-  <!-- 教学 -->
-  <section id="teaching" class="fade-in delay-3">
-    <div class="section-header">
-      <div class="section-title">Teaching <span>开设课程</span></div>
-      <div class="section-line"></div>
+  <!-- 开设课程 -->
+  <section class="section" id="teaching">
+    <div>
+      <span class="section-title">开设课程</span>
+      <span class="section-sub">Courses</span>
     </div>
-    <div class="panel">
-      <ul class="clean">
-        <li>数理逻辑</li>
-        <li>元伦理学</li>
-        <li>数学哲学</li>
-      </ul>
-    </div>
+    <ul class="plain">
+      <li>数理逻辑</li>
+      <li>元伦理学</li>
+      <li>数学哲学</li>
+    </ul>
   </section>
 
   <!-- 发表论文 -->
-  <section id="pubs" class="fade-in delay-4">
-    <div class="section-header">
-      <div class="section-title">Publications <span>发表论文</span></div>
-      <div class="section-line"></div>
+  <section class="section" id="pubs">
+    <div>
+      <span class="section-title">发表论文</span>
+      <span class="section-sub">Publications</span>
     </div>
-    <div class="panel">
-      <ul class="pub-list">
-        <li class="pub-item">
-          <div class="pub-index"><span>1</span></div>
-          <div>
-            <div class="pub-title">“分析不可或缺性论证：解释差异性”</div>
-            <div class="pub-meta">《自然辩证法通讯》，2019 年第 9 期</div>
-          </div>
-        </li>
-        <li class="pub-item">
-          <div class="pub-index"><span>2</span></div>
-          <div>
-            <div class="pub-title">“解决进化揭穿论证：数学信念的分离解释”</div>
-            <div class="pub-meta">《哲学动态》，2022 年第 5 期</div>
-          </div>
-        </li>
-        <li class="pub-item">
-          <div class="pub-index"><span>3</span></div>
-          <div>
-            <div class="pub-title">“有限算术知识的结构主义解释”</div>
-            <div class="pub-meta">《自然辩证法通讯》，2023 年第 6 期</div>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <ol class="pubs">
+      <li>
+        <span class="pub-title">“分析不可或缺性论证：解释差异性”</span>，
+        <span class="pub-meta">《自然辩证法通讯》，2019年第9期。</span>
+      </li>
+      <li>
+        <span class="pub-title">“解决进化揭穿论证：数学信念的分离解释”</span>，
+        <span class="pub-meta">《哲学动态》，2022年第5期。</span>
+      </li>
+      <li>
+        <span class="pub-title">“有限算术知识的结构主义解释”</span>，
+        <span class="pub-meta">《自然辩证法通讯》，2023年第6期。</span>
+      </li>
+    </ol>
   </section>
-</div>
+</main>
 
 <footer>
-  © <span id="year"></span> 张仑 · 山东大学哲学与社会发展学院
+  <div>© <span id="year"></span> 张仑</div>
+  <div>山东大学哲学与社会发展学院</div>
 </footer>
 
 <script>
-  // 年份
+  // 页脚年份
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // 顶部导航平滑滚动
-  document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      var id = this.getAttribute('href');
-      var el = document.querySelector(id);
-      if (el) {
-        var top = el.getBoundingClientRect().top + window.scrollY - 72;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }
-    });
-  });
 </script>
 </body>
 </html>
