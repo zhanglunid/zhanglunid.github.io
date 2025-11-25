@@ -2,397 +2,678 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>张仑 | 个人主页</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>欢迎来到我的主页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    /* ======= 全局：模拟千禧年网页的感觉 ======= */
-    body {
+    /* ===== 全局 & 苹果风格基础 ===== */
+    :root {
+      --bg: #050509;
+      --card-bg: #111118;
+      --accent: #f5f5f7;
+      --accent-soft: #1c1c24;
+      --text-main: #f5f5f7;
+      --text-sub: #a1a1aa;
+      --highlight: #0a84ff;
+      --danger: #ff453a;
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 30px 60px rgba(0, 0, 0, 0.7);
+      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background:
-        url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==") repeat,
-        #8eaadf; /* 背景色像旧壁纸 */
-      font-family: "Verdana", "Tahoma", "宋体", sans-serif;
-      font-size: 13px;
-      color: #000033;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #1a1c2e 0, #050509 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     a {
-      color: #0000cc;
-      text-decoration: underline;
-    }
-    a:hover {
-      color: #ff3300;
+      color: inherit;
+      text-decoration: none;
     }
 
-    /* ======= 页面主框架：固定宽度居中 ======= */
-    .page {
-      width: 860px;
-      margin: 12px auto 30px;
-      background-color: #f7f7ff;
-      border: 1px solid #333366;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    /* ===== 顶部导航栏（苹果官网感） ===== */
+    .navbar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 12, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
 
-    /* ======= 顶部横幅 ======= */
-    .banner {
-      background: linear-gradient(to right, #003399, #6699ff);
-      color: #ffffff;
-      padding: 16px 20px 10px;
-      border-bottom: 2px solid #000033;
+    .navbar-inner {
+      width: 100%;
+      max-width: 980px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 13px;
+      color: var(--text-sub);
     }
-    .banner-title {
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 0 #000000;
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
-    .banner-sub {
-      margin-top: 4px;
-      font-size: 11px;
-      letter-spacing: 1px;
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #0a84ff);
+      box-shadow: 0 0 12px rgba(10, 132, 255, 0.8);
+    }
+
+    .nav-link {
+      cursor: default;
+    }
+
+    /* ===== 主体布局 ===== */
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px 60px;
+    }
+
+    .main-inner {
+      width: 100%;
+      max-width: 980px;
+    }
+
+    /* ===== 横幅区域 ===== */
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #34c759;
+      box-shadow: 0 0 8px rgba(52, 199, 89, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 6vw, 44px);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-sub);
+    }
+
+    .hero-gradient {
+      background: linear-gradient(120deg, #ffffff, #e2e8ff, #a5b4fc);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* ===== 游戏卡片 ===== */
+    .card {
+      background: radial-gradient(circle at 0 0, #222234 0, #111118 40%, #050509 100%);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card-label {
+      font-size: 13px;
       text-transform: uppercase;
-      opacity: 0.85;
+      letter-spacing: 0.16em;
+      color: var(--text-sub);
     }
 
-    /* ======= 顶部导航条：经典色块按钮 ======= */
-    .nav {
-      background-color: #3366cc;
-      border-bottom: 1px solid #000033;
+    .card-title {
+      font-size: 26px;
+      font-weight: 650;
     }
-    .nav ul {
-      margin: 0;
-      padding: 0 10px;
-      list-style: none;
+
+    .card-title span {
+      color: var(--highlight);
+    }
+
+    .card-text {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .chip-row {
       display: flex;
       flex-wrap: wrap;
-    }
-    .nav li {
-      margin: 0;
-      padding: 0;
-    }
-    .nav a {
-      display: block;
-      padding: 6px 14px;
-      font-size: 12px;
-      color: #ffffff;
-      text-decoration: none;
-      border-right: 1px solid #003366;
-      background: linear-gradient(to bottom, #6699ff, #3366cc);
-    }
-    .nav a:hover {
-      background: linear-gradient(to bottom, #ffffcc, #ffcc66);
-      color: #000033;
-      text-decoration: none;
+      gap: 10px;
+      margin-top: 4px;
     }
 
-    /* ======= 内容区域：左内容 + 右栏 ======= */
-    .content-wrap {
-      display: table;
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .content-main {
-      display: table-cell;
-      width: 640px;
-      padding: 12px 16px 16px;
-      border-right: 1px dotted #9999cc;
-      vertical-align: top;
-    }
-    .content-side {
-      display: table-cell;
-      width: 220px;
-      padding: 12px 10px 16px;
-      vertical-align: top;
-      background-color: #f2f2ff;
-    }
-
-    @media (max-width: 880px) {
-      .page {
-        width: 96%;
-      }
-      .content-wrap {
-        display: block;
-      }
-      .content-main,
-      .content-side {
-        display: block;
-        width: auto;
-        border-right: none;
-        border-top: 1px dotted #9999cc;
-      }
-    }
-
-    /* ======= 标题样式：带小图标那种 ======= */
-    .section-title {
-      margin: 10px 0 4px;
-      padding: 4px 8px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #ffffff;
-      background: linear-gradient(to right, #003399, #6699ff);
-      border-left: 4px solid #ffcc33;
-      border-top: 1px solid #000033;
-      border-bottom: 1px solid #000033;
-    }
-    .section-body {
-      padding: 6px 6px 2px;
-      border-left: 1px solid #cccccc;
-      border-right: 1px solid #cccccc;
-      border-bottom: 1px solid #cccccc;
-      background-color: #ffffff;
-    }
-
-    .section-body p {
-      margin: 4px 0 6px;
-    }
-
-    /* ======= 右侧信息盒子 ======= */
-    .side-box {
-      margin-bottom: 12px;
-      border: 1px solid #9999cc;
-      background-color: #ffffff;
-    }
-    .side-title {
-      padding: 4px 6px;
-      background: linear-gradient(to right, #666699, #9999cc);
-      font-size: 12px;
-      font-weight: bold;
-      color: #ffffff;
-      border-bottom: 1px solid #333366;
-    }
-    .side-body {
-      padding: 6px;
-      font-size: 12px;
-    }
-    .side-body p {
-      margin: 3px 0;
-    }
-
-    /* ======= 简单小表格风格 ======= */
-    .info-table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 13px;
-    }
-    .info-table th,
-    .info-table td {
-      padding: 3px 4px;
-      border-bottom: 1px dotted #cccccc;
-      text-align: left;
-    }
-    .info-table th {
-      width: 80px;
-      color: #333366;
-      font-weight: normal;
-    }
-
-    /* ======= 发表列表 ======= */
-    .pub-list {
-      margin: 4px 0 4px 18px;
-      padding: 0;
-    }
-    .pub-list li {
-      margin-bottom: 4px;
-    }
-
-    /* ======= footer ======= */
-    .footer {
-      padding: 6px 10px 10px;
+    .chip {
       font-size: 11px;
-      color: #333366;
-      background-color: #dde3ff;
-      border-top: 1px solid #9999cc;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .btn-primary {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      background: linear-gradient(135deg, #0a84ff, #4f9fff);
+      color: #fff;
+      box-shadow: var(--shadow-light);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 16px 40px rgba(10, 132, 255, 0.6);
+    }
+
+    .btn-ghost {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: transparent;
+      color: var(--text-main);
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .btn-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--highlight);
+    }
+
+    /* ===== 游戏区域 ===== */
+    .card-right {
+      background: radial-gradient(circle at top, #1c1c2a 0, #080810 60%);
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 16px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .game-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .game-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .signal {
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .signal-bar {
+      width: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .signal-bar:nth-child(1) {
+      height: 6px;
+    }
+    .signal-bar:nth-child(2) {
+      height: 9px;
+    }
+    .signal-bar:nth-child(3) {
+      height: 12px;
+      background: #30d158;
+      box-shadow: 0 0 8px rgba(48, 209, 88, 0.9);
+    }
+
+    .score-label {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .game-wrapper {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+      align-self: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    canvas {
+      display: block;
+      image-rendering: pixelated;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 60%, #000 100%);
+    }
+
+    .game-hint {
+      font-size: 11px;
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .keys {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .key {
+      padding: 3px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 10px;
+      min-width: 18px;
       text-align: center;
     }
 
-    /* ======= 顶部小提示条（伪 marquee） ======= */
-    .ticker {
-      padding: 4px 10px;
+    .game-message {
       font-size: 11px;
-      color: #000033;
-      background-color: #fffbdd;
-      border-bottom: 1px solid #e0d5a0;
+      color: var(--danger);
+      min-height: 14px;
+    }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      font-size: 11px;
+      color: var(--text-sub);
+      text-align: center;
+      padding: 16px;
     }
   </style>
 </head>
 
 <body>
-
-<div class="page">
-  <!-- 顶部横幅 -->
-  <div class="banner">
-    <div class="banner-title">张仑 个人主页</div>
-    <div class="banner-sub">PHILOSOPHY · MATHEMATICS · METAETHICS · SHANDONG UNIVERSITY</div>
-  </div>
-
-  <!-- 顶部提示条（复古感） -->
-  <div class="ticker">
-    提示：本页为个人学术主页（千禧年风格），建议在桌面浏览器下访问以获得最佳观感。
-  </div>
-
-  <!-- 导航条 -->
-  <div class="nav">
-    <ul>
-      <li><a href="#about">基本信息</a></li>
-      <li><a href="#edu">教育经历</a></li>
-      <li><a href="#research">研究领域</a></li>
-      <li><a href="#teaching">开设课程</a></li>
-      <li><a href="#pubs">发表论文</a></li>
-      <li><a href="#contact">联系方式</a></li>
-    </ul>
-  </div>
-
-  <!-- 内容区：主栏 + 侧栏 -->
-  <div class="content-wrap">
-    <!-- 左侧主内容 -->
-    <div class="content-main">
-      <!-- 基本信息 -->
-      <a name="about"></a>
-      <div class="section-title">◆ 基本信息</div>
-      <div class="section-body">
-        <table class="info-table">
-          <tr>
-            <th>姓名：</th>
-            <td>张仑</td>
-          </tr>
-          <tr>
-            <th>性别：</th>
-            <td>男</td>
-          </tr>
-          <tr>
-            <th>出生年月：</th>
-            <td>1992年7月</td>
-          </tr>
-          <tr>
-            <th>主要研究领域：</th>
-            <td>数学哲学，元伦理学</td>
-          </tr>
-        </table>
-        <p>
-          我目前在山东大学哲学与社会发展学院从事教学与研究工作，
-          主要关注数学哲学与元伦理学领域的问题，包括数学对象与数学真理的本体论地位、
-          不可或缺性论证、进化揭穿论证，以及结构主义视角下有限算术知识的解释等。
-        </p>
+  <!-- 顶部苹果风格导航栏 -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="nav-left">
+        <span class="nav-link">主页</span>
+        <span class="nav-link">关于</span>
       </div>
-
-      <!-- 教育经历 -->
-      <a name="edu"></a>
-      <div class="section-title">◆ 教育经历</div>
-      <div class="section-body">
-        <p><strong>浙江大学，理学学士</strong>（2015）</p>
-        <p><strong>浙江大学，哲学博士</strong>（2022）</p>
-        <p><strong>美国哥伦比亚大学哲学系，联合培养博士生</strong>（2019–2021）</p>
-        <p style="margin-top:6px;">
-          2019–2021 年期间，在国家留学基金委（CSC）资助下赴美国哥伦比亚大学哲学系
-          开展联合培养和学术交流，进一步拓展了在数学哲学与元伦理学方面的研究视野。
-        </p>
+      <div class="nav-center">
+        <span class="nav-dot"></span>
+        <span>张仑 · Personal Site</span>
       </div>
-
-      <!-- 研究领域 -->
-      <a name="research"></a>
-      <div class="section-title">◆ 主要研究领域</div>
-      <div class="section-body">
-        <p><strong>数学哲学：</strong></p>
-        <p style="margin-left:1em;">
-          主要关注数学对象与数学真理的本体论、认识论基础，不可或缺性论证的不同版本及其解释差异，
-          以及在结构主义视角下理解数学知识（尤其是有限算术知识）的可能路径。
-        </p>
-        <p><strong>元伦理学：</strong></p>
-        <p style="margin-left:1em;">
-          探讨道德事实与规范性理由的性质，关注道德实在论与反实在论的争论，
-          尤其是进化揭穿论证对于数学与道德信念的挑战，以及相关的应对策略。
-        </p>
-      </div>
-
-      <!-- 教学 -->
-      <a name="teaching"></a>
-      <div class="section-title">◆ 开设课程</div>
-      <div class="section-body">
-        <ul class="pub-list" style="list-style-type:square;">
-          <li>数理逻辑</li>
-          <li>元伦理学</li>
-          <li>数学哲学</li>
-        </ul>
-      </div>
-
-      <!-- 发表论文 -->
-      <a name="pubs"></a>
-      <div class="section-title">◆ 发表论文</div>
-      <div class="section-body">
-        <ol class="pub-list">
-          <li>
-            “分析不可或缺性论证：解释差异性”，《自然辩证法通讯》，2019年第9期。
-          </li>
-          <li>
-            “解决进化揭穿论证：数学信念的分离解释”，《哲学动态》，2022年第5期。
-          </li>
-          <li>
-            “有限算术知识的结构主义解释”，《自然辩证法通讯》，2023年第6期。
-          </li>
-        </ol>
+      <div class="nav-right">
+        <span class="nav-link">中文</span>
       </div>
     </div>
+  </header>
 
-    <!-- 右侧栏 -->
-    <div class="content-side">
-      <!-- 联系方式 -->
-      <a name="contact"></a>
-      <div class="side-box">
-        <div class="side-title">联系方式 Contact</div>
-        <div class="side-body">
-          <p><strong>办公地址：</strong><br>
-            山东大学中心校区知新楼A座1405
-          </p>
-          <p><strong>通信地址：</strong><br>
-            山东省济南市历城区山大南路27号<br>
-            山东大学哲学与社会发展学院<br>
-            邮编250100
-          </p>
-          <p><strong>电子邮箱：</strong><br>
-            <a href="mailto:lunzhang@sdu.edu.cn">lunzhang@sdu.edu.cn</a>
-          </p>
+  <!-- 主体内容 -->
+  <main class="main">
+    <div class="main-inner">
+      <!-- 横幅文字 -->
+      <section class="hero">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>欢迎来到我的主页</span>
         </div>
-      </div>
+        <h1 class="hero-title">
+          <span class="hero-gradient">欢迎来到我的主页</span>
+        </h1>
+        <p class="hero-subtitle">
+          一个极简风格的小站，外观向 Apple 致敬，里面藏着一只像素风贪吃蛇。
+        </p>
+      </section>
 
-      <!-- 小简介 -->
-      <div class="side-box">
-        <div class="side-title">研究关键词 Keywords</div>
-        <div class="side-body">
-          <ul style="margin:0 0 0 14px;padding:0;">
-            <li>数学哲学</li>
-            <li>元伦理学</li>
-            <li>不可或缺性论证</li>
-            <li>进化揭穿论证</li>
-            <li>结构主义</li>
-          </ul>
+      <!-- 游戏卡片 -->
+      <section class="card">
+        <div class="card-left">
+          <div class="card-label">Classic · Game</div>
+          <h2 class="card-title">
+            复古贪吃蛇，<span>在我的主页上复活</span>。
+          </h2>
+          <p class="card-text">
+            使用方向键（或 W/A/S/D）控制这条小蛇，在棋盘上游走、吃到更多食物。
+            每吃到一个食物，你的长度和得分都会增加。但要小心——
+            撞到边界或者咬到自己，就 Game Over 啦。
+          </p>
+          <div class="chip-row">
+            <div class="chip">像素风画面</div>
+            <div class="chip">键盘操作</div>
+            <div class="chip">浏览器原生 Canvas</div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary" id="restartBtn">重新开始</button>
+            <button class="btn-ghost" id="focusBtn">
+              <span class="btn-dot"></span>
+              集中键盘控制
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- 时间/版权之类 -->
-      <div class="side-box">
-        <div class="side-title">更新信息</div>
-        <div class="side-body">
-          <p>本页为张仑个人学术主页。</p>
-          <p>Last update: <span id="last-year">2025</span></p>
+        <div class="card-right">
+          <div class="game-header">
+            <div class="game-status">
+              <div class="signal">
+                <span class="signal-bar"></span>
+                <span class="signal-bar"></span>
+                <span class="signal-bar"></span>
+              </div>
+              <span>Snake Studio · Online</span>
+            </div>
+            <div class="score-label" id="scoreLabel">Score: 0</div>
+          </div>
+
+          <div class="game-wrapper">
+            <!-- 游戏画布 -->
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+          </div>
+
+          <div class="game-hint">
+            <span>
+              控制：<span class="keys">
+                <span class="key">↑</span>
+                <span class="key">↓</span>
+                <span class="key">←</span>
+                <span class="key">→</span>
+              </span>
+              或
+              <span class="keys">
+                <span class="key">W</span>
+                <span class="key">S</span>
+                <span class="key">A</span>
+                <span class="key">D</span>
+              </span>
+            </span>
+            <span>Tips：游戏开始后，直接按方向键即可移动。</span>
+          </div>
+          <div class="game-message" id="gameMessage"></div>
         </div>
-      </div>
+      </section>
     </div>
-  </div>
+  </main>
 
-  <!-- 页脚 -->
-  <div class="footer">
-    © <span id="year"></span> 张仑 · 山东大学哲学与社会发展学院
-  </div>
-</div>
+  <footer class="footer">
+    © <span id="year"></span> 张仑 · Made with HTML, CSS &amp; JavaScript.
+  </footer>
 
-<script>
-  // 年份
-  var now = new Date();
-  document.getElementById('year').textContent = now.getFullYear();
-  document.getElementById('last-year').textContent = now.getFullYear();
-</script>
+  <!-- ===== 贪吃蛇游戏脚本 ===== -->
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreLabel = document.getElementById("scoreLabel");
+    const gameMessage = document.getElementById("gameMessage");
+    const restartBtn = document.getElementById("restartBtn");
+    const focusBtn = document.getElementById("focusBtn");
 
+    const box = 20; // 网格大小
+    const rows = canvas.height / box;
+    const cols = canvas.width / box;
+
+    let snake;
+    let direction;
+    let nextDirection;
+    let food;
+    let score;
+    let gameInterval;
+    let speed = 120; // 毫秒
+
+    function initGame() {
+      const startX = Math.floor(cols / 2);
+      const startY = Math.floor(rows / 2);
+
+      snake = [
+        { x: startX, y: startY },
+        { x: startX - 1, y: startY },
+        { x: startX - 2, y: startY },
+      ];
+      direction = "RIGHT";
+      nextDirection = "RIGHT";
+      score = 0;
+      scoreLabel.textContent = "Score: " + score;
+      gameMessage.textContent = "";
+
+      placeFood();
+
+      if (gameInterval) clearInterval(gameInterval);
+      gameInterval = setInterval(gameLoop, speed);
+
+      draw();
+    }
+
+    function placeFood() {
+      let valid = false;
+      let x, y;
+      while (!valid) {
+        x = Math.floor(Math.random() * cols);
+        y = Math.floor(Math.random() * rows);
+        valid = !snake.some((segment) => segment.x === x && segment.y === y);
+      }
+      food = { x, y };
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+    }
+
+    function update() {
+      direction = nextDirection;
+
+      const head = { ...snake[0] };
+      if (direction === "LEFT") head.x -= 1;
+      if (direction === "RIGHT") head.x += 1;
+      if (direction === "UP") head.y -= 1;
+      if (direction === "DOWN") head.y += 1;
+
+      // 撞墙
+      if (
+        head.x < 0 ||
+        head.x >= cols ||
+        head.y < 0 ||
+        head.y >= rows
+      ) {
+        gameOver("撞到墙啦！");
+        return;
+      }
+
+      // 撞到自己
+      if (snake.some((segment) => segment.x === head.x && segment.y === head.y)) {
+        gameOver("小心点，你咬到自己了！");
+        return;
+      }
+
+      snake.unshift(head);
+
+      // 吃到食物
+      if (head.x === food.x && head.y === food.y) {
+        score++;
+        scoreLabel.textContent = "Score: " + score;
+        placeFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+    function draw() {
+      // 清屏背景
+      ctx.fillStyle = "#020617";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 轻微网格线
+      ctx.strokeStyle = "rgba(148, 163, 184, 0.1)";
+      for (let i = 0; i <= cols; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * box + 0.5, 0);
+        ctx.lineTo(i * box + 0.5, canvas.height);
+        ctx.stroke();
+      }
+      for (let j = 0; j <= rows; j++) {
+        ctx.beginPath();
+        ctx.moveTo(0, j * box + 0.5);
+        ctx.lineTo(canvas.width, j * box + 0.5);
+        ctx.stroke();
+      }
+
+      // 画食物
+      const gradientFood = ctx.createRadialGradient(
+        food.x * box + box / 2,
+        food.y * box + box / 2,
+        2,
+        food.x * box + box / 2,
+        food.y * box + box / 2,
+        box / 1.3
+      );
+      gradientFood.addColorStop(0, "#f97316");
+      gradientFood.addColorStop(1, "#b91c1c");
+      ctx.fillStyle = gradientFood;
+      ctx.fillRect(food.x * box + 2, food.y * box + 2, box - 4, box - 4);
+
+      // 画蛇
+      snake.forEach((segment, index) => {
+        if (index === 0) {
+          // 头
+          const gradientHead = ctx.createRadialGradient(
+            segment.x * box + box / 2,
+            segment.y * box + box / 2,
+            2,
+            segment.x * box + box / 2,
+            segment.y * box + box / 2,
+            box / 1.4
+          );
+          gradientHead.addColorStop(0, "#38bdf8");
+          gradientHead.addColorStop(1, "#0f172a");
+          ctx.fillStyle = gradientHead;
+        } else {
+          ctx.fillStyle = "#0ea5e9";
+        }
+        ctx.fillRect(segment.x * box + 2, segment.y * box + 2, box - 4, box - 4);
+      });
+    }
+
+    function gameOver(msg) {
+      clearInterval(gameInterval);
+      gameMessage.textContent = "Game Over · " + msg + " 点击“重新开始”再来一局。";
+    }
+
+    function handleKeydown(e) {
+      const key = e.key.toLowerCase();
+      if (["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"].includes(key)) {
+        e.preventDefault();
+      }
+
+      if ((key === "arrowup" || key === "w") && direction !== "DOWN") {
+        nextDirection = "UP";
+      } else if ((key === "arrowdown" || key === "s") && direction !== "UP") {
+        nextDirection = "DOWN";
+      } else if ((key === "arrowleft" || key === "a") && direction !== "RIGHT") {
+        nextDirection = "LEFT";
+      } else if ((key === "arrowright" || key === "d") && direction !== "LEFT") {
+        nextDirection = "RIGHT";
+      }
+    }
+
+    document.addEventListener("keydown", handleKeydown);
+    restartBtn.addEventListener("click", initGame);
+
+    focusBtn.addEventListener("click", () => {
+      // 触发一次虚假的 focus 提示
+      gameMessage.textContent = "键盘已准备就绪，直接使用方向键或 W/A/S/D 控制即可。";
+      setTimeout(() => {
+        if (gameMessage.textContent.startsWith("键盘已准备")) {
+          gameMessage.textContent = "";
+        }
+      }, 2500);
+    });
+
+    // 初始化年份 & 游戏
+    document.getElementById("year").textContent = new Date().getFullYear();
+    initGame();
+  </script>
 </body>
 </html>
