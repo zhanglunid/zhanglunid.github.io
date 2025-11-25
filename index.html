@@ -2,296 +2,219 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>张仑 | 个人主页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root{
-      --bg: #0b0d12;
-      --card: rgba(255,255,255,0.06);
-      --card-strong: rgba(255,255,255,0.10);
-      --text: #e9edf4;
-      --muted: #aab3c5;
-      --accent: #7aa2ff;
-      --accent-2: #7ef0d6;
-      --line: rgba(255,255,255,0.12);
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    /* ===== 全局 & 配色：偏苹果官网的极简风 ===== */
+    :root {
+      --bg: #f5f5f7;
+      --bg-section: #ffffff;
+      --text: #1d1d1f;
+      --subtext: #6e6e73;
+      --line: #d2d2d7;
+      --accent: #0071e3;
+      --accent-light: #e8f1ff;
       --maxw: 980px;
     }
-    *{box-sizing:border-box;}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
-                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #1b255a 0%, transparent 60%),
-        radial-gradient(900px 500px at 100% 0%, #123b3f 0%, transparent 55%),
-        var(--bg);
-      line-height:1.6;
-    }
-    a{color:var(--accent); text-decoration:none;}
-    a:hover{text-decoration:underline;}
 
-    /* layout */
-    .wrap{max-width: var(--maxw); margin:0 auto; padding: 28px 18px 80px;}
-    header{
-      position: sticky; top: 0; z-index: 10;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(180deg, rgba(11,13,18,0.9), rgba(11,13,18,0.4));
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                   system-ui, "PingFang SC", "Hiragino Sans GB",
+                   "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== 顶部导航（简洁窄条，类似 apple.com） ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background-color: rgba(245,245,247,0.85);
+      border-bottom: 1px solid rgba(210,210,215,0.7);
+    }
+
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .nav-left {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      opacity: 0.8;
+      text-decoration: none;
+      padding: 3px 0;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      border-bottom: 1px solid var(--text);
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ===== 通用布局 ===== */
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      padding-bottom: 8px;
+      margin-bottom: 20px;
       border-bottom: 1px solid var(--line);
     }
-    .nav{
-      max-width: var(--maxw); margin:0 auto; padding: 10px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-    }
-    .brand{
-      font-weight:700; letter-spacing:0.5px;
-      display:flex; align-items:center; gap:10px;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 12px rgba(122,162,255,0.9);
-    }
-    nav ul{
-      list-style:none; padding:0; margin:0; display:flex; gap:12px; flex-wrap:wrap;
-    }
-    nav a{
-      display:inline-block; padding:6px 10px; border-radius:10px;
-      color: var(--text); font-size: 14px;
-      background: transparent; border: 1px solid transparent;
-    }
-    nav a:hover{
-      background: var(--card); border-color: var(--line);
-      text-decoration:none;
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
-    /* hero */
-    .hero{
-      margin-top: 18px;
-      display:grid; grid-template-columns: 1.2fr 0.8fr; gap:16px;
-    }
-    @media (max-width: 860px){
-      .hero{grid-template-columns: 1fr;}
-    }
-    .card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .hero h1{
-      margin: 0 0 6px 0;
-      font-size: 34px; letter-spacing:1px;
-    }
-    .subtitle{
-      color: var(--muted); font-size: 15px; margin-bottom: 12px;
-    }
-    .tagrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
-    .tag{
-      font-size: 12px; color:#dfe6ff;
-      background: rgba(122,162,255,0.12);
-      border: 1px solid rgba(122,162,255,0.35);
-      padding: 4px 8px; border-radius: 999px;
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--subtext);
+      margin-top: 4px;
     }
 
-    /* section */
-    section{margin-top: 16px;}
-    section .stitle{
-      display:flex; align-items:center; gap:10px; margin-bottom: 10px;
-      font-size: 18px; font-weight:700;
-    }
-    .stitle .bar{
-      width:8px; height:18px; border-radius:4px;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    /* ===== Hero 区：大字号 + 极简 ===== */
+    .hero {
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .grid{
-      display:grid; grid-template-columns: repeat(2,1fr); gap:12px;
-    }
-    @media (max-width: 720px){
-      .grid{grid-template-columns:1fr;}
-    }
-
-    .kv{
-      display:grid; grid-template-columns:110px 1fr; gap:8px 10px;
-      font-size: 14.5px;
-    }
-    .kv .k{color: var(--muted);}
-    .kv .v{color: var(--text);}
-
-    /* lists */
-    ul.clean{margin:0; padding-left:18px;}
-    ul.clean li{margin:6px 0;}
-    .pub li{margin:10px 0;}
-    .pub .title{font-weight:600;}
-    .pub .meta{color:var(--muted); font-size: 13px; margin-top:2px;}
-
-    footer{
-      margin-top: 28px; padding-top: 14px; border-top:1px dashed var(--line);
-      color: var(--muted); font-size: 13px; text-align:center;
+    .hero-title {
+      font-size: clamp(32px, 5vw, 40px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin: 0 0 12px;
     }
 
-    /* small utilities */
-    .pill{
-      display:inline-block; font-size:12px; color:var(--muted);
-      border:1px solid var(--line); padding:3px 8px; border-radius:999px;
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--subtext);
+      margin-bottom: 16px;
     }
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
-  </style>
-</head>
 
-<body>
-<header>
-  <div class="nav">
-    <div class="brand"><span class="dot"></span>张仑 · 个人主页</div>
-    <nav>
-      <ul>
-        <li><a href="#about">基本信息</a></li>
-        <li><a href="#edu">教育经历</a></li>
-        <li><a href="#research">研究领域</a></li>
-        <li><a href="#teaching">开设课程</a></li>
-        <li><a href="#pubs">发表论文</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    .hero-meta {
+      font-size: 14px;
+      color: var(--subtext);
+    }
 
-<div class="wrap">
-  <!-- HERO -->
-  <div class="hero">
-    <div class="card">
-      <h1>张仑 <span class="pill">男 · 1992.07</span></h1>
-      <div class="subtitle">
-        山东大学哲学与社会发展学院 · 数学哲学 / 元伦理学
-      </div>
-      <div class="tagrow">
-        <span class="tag">数学哲学</span>
-        <span class="tag">元伦理学</span>
-        <span class="tag">数理逻辑</span>
-        <span class="tag">AI & 形式方法</span>
-      </div>
-      <p style="margin-top:12px;">
-        欢迎来到我的个人主页。我主要从事数学哲学与元伦理学研究，
-        关注形式模型、解释与规范性的交叉问题。
-      </p>
-    </div>
+    .hero-meta span + span::before {
+      content: "·";
+      margin: 0 6px;
+      color: #a1a1a6;
+    }
 
-    <div class="card">
-      <div class="stitle"><span class="bar"></span>联系</div>
-      <div class="kv">
-        <div class="k">办公地址</div>
-        <div class="v">山东大学中心校区知新楼A座1405</div>
+    .hero-tagline {
+      margin-top: 20px;
+      font-size: 15px;
+      max-width: 620px;
+      color: var(--text);
+    }
 
-        <div class="k">通信地址</div>
-        <div class="v">山东省济南市历城区山大南路27号<br/>山东大学哲学与社会发展学院（250100）</div>
+    /* ===== 两列信息区 ===== */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      margin-top: 24px;
+    }
 
-        <div class="k">电子邮箱</div>
-        <div class="v mono"><a href="mailto:lunzhang@sdu.edu.cn">lunzhang@sdu.edu.cn</a></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="stitle"><span class="bar"></span>基本信息</div>
-    <div class="card">
-      <div class="kv">
-        <div class="k">姓名</div><div class="v">张仑</div>
-        <div class="k">性别</div><div class="v">男</div>
-        <div class="k">出生年月</div><div class="v">1992年7月</div>
-        <div class="k">研究方向</div><div class="v">数学哲学，元伦理学</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDU -->
-  <section id="edu">
-    <div class="stitle"><span class="bar"></span>教育经历</div>
-    <div class="grid">
-      <div class="card">
-        <div style="font-weight:700;">浙江大学 · 理学学士</div>
-        <div class="subtitle">2015</div>
-        <div style="color:var(--muted); font-size:14px;">本科阶段学习理学与相关形式方法训练。</div>
-      </div>
-      <div class="card">
-        <div style="font-weight:700;">浙江大学 · 哲学博士</div>
-        <div class="subtitle">2022</div>
-        <div style="color:var(--muted); font-size:14px;">博士阶段研究数学哲学与元伦理学核心议题。</div>
-      </div>
-      <div class="card">
-        <div style="font-weight:700;">哥伦比亚大学哲学系 · 联合培养</div>
-        <div class="subtitle">2019–2021（CSC 资助）</div>
-        <div style="color:var(--muted); font-size:14px;">在美期间进行访学与合作研究。</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESEARCH -->
-  <section id="research">
-    <div class="stitle"><span class="bar"></span>主要研究领域</div>
-    <div class="card">
-      <ul class="clean">
-        <li><b>数学哲学：</b>关注数学对象、解释与认识论基础问题。</li>
-        <li><b>元伦理学：</b>关注规范事实、道德认识与反实在论/实在论论证。</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- TEACHING -->
-  <section id="teaching">
-    <div class="stitle"><span class="bar"></span>开设课程</div>
-    <div class="card">
-      <ul class="clean">
-        <li>数理逻辑</li>
-        <li>元伦理学</li>
-        <li>数学哲学</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- PUBS -->
-  <section id="pubs">
-    <div class="stitle"><span class="bar"></span>发表论文</div>
-    <div class="card">
-      <ol class="clean pub">
-        <li>
-          <div class="title">“分析不可或缺性论证：解释差异性”</div>
-          <div class="meta">《自然辩证法通讯》，2019年第9期</div>
-        </li>
-        <li>
-          <div class="title">“解决进化揭穿论证：数学信念的分离解释”</div>
-          <div class="meta">《哲学动态》，2022年第5期</div>
-        </li>
-        <li>
-          <div class="title">“有限算术知识的结构主义解释”</div>
-          <div class="meta">《自然辩证法通讯》，2023年第6期</div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <footer>
-    © <span id="year"></span> 张仑 · 山东大学哲学与社会发展学院
-  </footer>
-</div>
-
-<script>
-  // 平滑滚动
-  document.querySelectorAll('nav a').forEach(a=>{
-    a.addEventListener('click', (e)=>{
-      const id = a.getAttribute('href');
-      if(id.startsWith('#')){
-        e.preventDefault();
-        document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
-        history.replaceState(null, '', id);
+    @media (max-width: 800px) {
+      .two-col {
+        grid-template-columns: 1fr;
       }
-    });
-  });
-  // 页脚年份
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-</body>
-</html>
+    }
+
+    .panel {
+      background-color: var(--bg-section);
+      border-radius: 24px;
+      padding: 20px 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      border: 1px solid rgba(210,210,215,0.7);
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .info-list {
+      font-size: 14px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 8px 10px;
+      margin-bottom: 6px;
+    }
+
+    .info-key {
+      color: var(--subtext);
+    }
+
+    .info-value {
+      color: var(--text);
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    /* ===== 教育/课程/研究 ===== */
+    .list-simple {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .li
