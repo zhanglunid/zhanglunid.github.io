@@ -6,32 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    /* ===== 全局 & 苹果风格基础 ===== */
     :root {
-      --bg: #050509;
-      --card-bg: #111118;
-      --accent: #f5f5f7;
-      --accent-soft: #1c1c24;
-      --text-main: #f5f5f7;
-      --text-sub: #a1a1aa;
-      --highlight: #0a84ff;
-      --danger: #ff453a;
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --shadow-soft: 0 30px 60px rgba(0, 0, 0, 0.7);
-      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.4);
+      --bg: #f5f5f7;
+      --card-bg: #ffffff;
+      --border-soft: #d2d2d7;
+      --text-main: #1d1d1f;
+      --text-sub: #6e6e73;
+      --highlight: #0071e3;
+      --danger: #ff3b30;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.06);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
         system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: radial-gradient(circle at top, #1a1c2e 0, #050509 55%, #000 100%);
+      background: var(--bg);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -43,27 +40,27 @@
       text-decoration: none;
     }
 
-    /* ===== 顶部导航栏（苹果官网感） ===== */
+    /* 顶部简约导航 */
     .navbar {
-      height: 44px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(10, 10, 12, 0.92);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid #e5e5ea;
+      background: rgba(245, 245, 247, 0.9);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 10;
     }
 
     .navbar-inner {
       width: 100%;
       max-width: 980px;
+      padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
       font-size: 13px;
       color: var(--text-sub);
     }
@@ -71,37 +68,26 @@
     .nav-left,
     .nav-right {
       display: flex;
+      gap: 16px;
       align-items: center;
-      gap: 18px;
     }
 
     .nav-center {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 15px;
       font-weight: 600;
-      color: var(--accent);
-    }
-
-    .nav-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffffff, #0a84ff);
-      box-shadow: 0 0 12px rgba(10, 132, 255, 0.8);
+      font-size: 14px;
+      color: var(--text-main);
     }
 
     .nav-link {
       cursor: default;
     }
 
-    /* ===== 主体布局 ===== */
+    /* 主体布局 */
     .main {
       flex: 1;
       display: flex;
       justify-content: center;
-      padding: 40px 16px 60px;
+      padding: 32px 16px 40px;
     }
 
     .main-inner {
@@ -109,58 +95,44 @@
       max-width: 980px;
     }
 
-    /* ===== 横幅区域 ===== */
+    /* 横幅区域 */
     .hero {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
+      justify-content: center;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 12px;
+      border: 1px solid #e5e5ea;
+      background: #ffffff;
+      font-size: 11px;
       color: var(--text-sub);
-      margin-bottom: 16px;
-    }
-
-    .hero-badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #34c759;
-      box-shadow: 0 0 8px rgba(52, 199, 89, 0.9);
-    }
-
-    .hero-title {
-      font-size: clamp(32px, 6vw, 44px);
-      font-weight: 700;
-      letter-spacing: 0.03em;
       margin-bottom: 10px;
     }
 
+    .hero-title {
+      font-size: clamp(28px, 4.4vw, 36px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
     .hero-subtitle {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-sub);
     }
 
-    .hero-gradient {
-      background: linear-gradient(120deg, #ffffff, #e2e8ff, #a5b4fc);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    /* ===== 游戏卡片 ===== */
+    /* 游戏卡片：简化布局、减少装饰 */
     .card {
-      background: radial-gradient(circle at 0 0, #222234 0, #111118 40%, #050509 100%);
-      border-radius: var(--radius-xl);
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
       box-shadow: var(--shadow-soft);
       padding: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       gap: 24px;
@@ -170,29 +142,26 @@
     @media (max-width: 768px) {
       .card {
         grid-template-columns: minmax(0, 1fr);
+        padding: 20px;
       }
     }
 
     .card-left {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
     }
 
     .card-label {
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       color: var(--text-sub);
     }
 
     .card-title {
-      font-size: 26px;
-      font-weight: 650;
-    }
-
-    .card-title span {
-      color: var(--highlight);
+      font-size: 22px;
+      font-weight: 600;
     }
 
     .card-text {
@@ -201,83 +170,56 @@
       line-height: 1.6;
     }
 
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .chip {
-      font-size: 11px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--text-sub);
-    }
-
     .btn-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 8px;
     }
 
     .btn-primary {
-      padding: 10px 18px;
+      padding: 9px 16px;
       border-radius: 999px;
       border: none;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      background: linear-gradient(135deg, #0a84ff, #4f9fff);
+      background: var(--highlight);
       color: #fff;
-      box-shadow: var(--shadow-light);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.15s ease,
+        box-shadow 0.15s ease;
+      box-shadow: 0 4px 12px rgba(0, 113, 227, 0.4);
     }
 
     .btn-primary:hover {
+      background: #0077ed;
       transform: translateY(-1px);
-      filter: brightness(1.04);
-      box-shadow: 0 16px 40px rgba(10, 132, 255, 0.6);
     }
 
     .btn-ghost {
-      padding: 10px 18px;
+      padding: 9px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: transparent;
-      color: var(--text-main);
+      border: 1px solid #d2d2d7;
+      background: #ffffff;
       font-size: 14px;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      color: var(--text-main);
       transition: background 0.15s ease, border-color 0.15s ease;
     }
 
     .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.24);
+      background: #f5f5f7;
+      border-color: #c7c7cc;
     }
 
-    .btn-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--highlight);
-    }
-
-    /* ===== 游戏区域 ===== */
+    /* 游戏区域（白底简洁风） */
     .card-right {
-      background: radial-gradient(circle at top, #1c1c2a 0, #080810 60%);
-      border-radius: var(--radius-lg);
-      padding: 14px 14px 16px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      border: 1px solid #e5e5ea;
+      background: #f9f9fb;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .game-header {
@@ -288,61 +230,27 @@
       color: var(--text-sub);
     }
 
-    .game-status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .signal {
-      display: inline-flex;
-      gap: 2px;
-    }
-
-    .signal-bar {
-      width: 3px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .signal-bar:nth-child(1) {
-      height: 6px;
-    }
-    .signal-bar:nth-child(2) {
-      height: 9px;
-    }
-    .signal-bar:nth-child(3) {
-      height: 12px;
-      background: #30d158;
-      box-shadow: 0 0 8px rgba(48, 209, 88, 0.9);
-    }
-
     .score-label {
       font-variant-numeric: tabular-nums;
     }
 
     .game-wrapper {
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
-      background: #000;
       align-self: center;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+      background: #ffffff;
+      border: 1px solid #e5e5ea;
     }
 
     canvas {
       display: block;
       image-rendering: pixelated;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 60%, #000 100%);
+      background: #f2f2f7;
     }
 
     .game-hint {
       font-size: 11px;
       color: var(--text-sub);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
     }
 
     .keys {
@@ -351,12 +259,13 @@
     }
 
     .key {
-      padding: 3px 6px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #d2d2d7;
       font-size: 10px;
       min-width: 18px;
       text-align: center;
+      background: #ffffff;
     }
 
     .game-message {
@@ -365,7 +274,7 @@
       min-height: 14px;
     }
 
-    /* ===== 页脚 ===== */
+    /* 页脚 */
     .footer {
       font-size: 11px;
       color: var(--text-sub);
@@ -376,17 +285,13 @@
 </head>
 
 <body>
-  <!-- 顶部苹果风格导航栏 -->
+  <!-- 简约导航 -->
   <header class="navbar">
     <div class="navbar-inner">
       <div class="nav-left">
         <span class="nav-link">主页</span>
-        <span class="nav-link">关于</span>
       </div>
-      <div class="nav-center">
-        <span class="nav-dot"></span>
-        <span>张仑 · Personal Site</span>
-      </div>
+      <div class="nav-center">张仑的主页</div>
       <div class="nav-right">
         <span class="nav-link">中文</span>
       </div>
@@ -398,79 +303,53 @@
     <div class="main-inner">
       <!-- 横幅文字 -->
       <section class="hero">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          <span>欢迎来到我的主页</span>
-        </div>
-        <h1 class="hero-title">
-          <span class="hero-gradient">欢迎来到我的主页</span>
-        </h1>
+        <div class="hero-badge">欢迎来到我的主页</div>
+        <h1 class="hero-title">欢迎来到我的主页</h1>
         <p class="hero-subtitle">
-          一个极简风格的小站，外观向 Apple 致敬，里面藏着一只像素风贪吃蛇。
+          一个白与灰的极简小站，下面是一个可以直接玩的贪吃蛇游戏。
         </p>
       </section>
 
       <!-- 游戏卡片 -->
       <section class="card">
         <div class="card-left">
-          <div class="card-label">Classic · Game</div>
-          <h2 class="card-title">
-            复古贪吃蛇，<span>在我的主页上复活</span>。
-          </h2>
+          <div class="card-label">Classic Game</div>
+          <h2 class="card-title">贪吃蛇 · 浏览器版</h2>
           <p class="card-text">
-            使用方向键（或 W/A/S/D）控制这条小蛇，在棋盘上游走、吃到更多食物。
-            每吃到一个食物，你的长度和得分都会增加。但要小心——
-            撞到边界或者咬到自己，就 Game Over 啦。
+            使用方向键或 W/A/S/D 控制小蛇，在棋盘上移动、吃掉食物并增长长度。
+            撞到边界或自己的身体时，游戏结束。点击“重新开始”即可再来一局。
           </p>
-          <div class="chip-row">
-            <div class="chip">像素风画面</div>
-            <div class="chip">键盘操作</div>
-            <div class="chip">浏览器原生 Canvas</div>
-          </div>
           <div class="btn-row">
             <button class="btn-primary" id="restartBtn">重新开始</button>
-            <button class="btn-ghost" id="focusBtn">
-              <span class="btn-dot"></span>
-              集中键盘控制
-            </button>
+            <button class="btn-ghost" id="focusBtn">键盘控制说明</button>
           </div>
         </div>
 
         <div class="card-right">
           <div class="game-header">
-            <div class="game-status">
-              <div class="signal">
-                <span class="signal-bar"></span>
-                <span class="signal-bar"></span>
-                <span class="signal-bar"></span>
-              </div>
-              <span>Snake Studio · Online</span>
-            </div>
-            <div class="score-label" id="scoreLabel">Score: 0</div>
+            <span>贪吃蛇</span>
+            <span class="score-label" id="scoreLabel">Score: 0</span>
           </div>
 
           <div class="game-wrapper">
-            <!-- 游戏画布 -->
             <canvas id="gameCanvas" width="400" height="400"></canvas>
           </div>
 
           <div class="game-hint">
-            <span>
-              控制：<span class="keys">
-                <span class="key">↑</span>
-                <span class="key">↓</span>
-                <span class="key">←</span>
-                <span class="key">→</span>
-              </span>
-              或
-              <span class="keys">
-                <span class="key">W</span>
-                <span class="key">S</span>
-                <span class="key">A</span>
-                <span class="key">D</span>
-              </span>
+            控制：
+            <span class="keys">
+              <span class="key">↑</span>
+              <span class="key">↓</span>
+              <span class="key">←</span>
+              <span class="key">→</span>
             </span>
-            <span>Tips：游戏开始后，直接按方向键即可移动。</span>
+            或
+            <span class="keys">
+              <span class="key">W</span>
+              <span class="key">S</span>
+              <span class="key">A</span>
+              <span class="key">D</span>
+            </span>
           </div>
           <div class="game-message" id="gameMessage"></div>
         </div>
@@ -479,10 +358,10 @@
   </main>
 
   <footer class="footer">
-    © <span id="year"></span> 张仑 · Made with HTML, CSS &amp; JavaScript.
+    © <span id="year"></span> 张仑
   </footer>
 
-  <!-- ===== 贪吃蛇游戏脚本 ===== -->
+  <!-- 贪吃蛇脚本（逻辑基本沿用，保持简单） -->
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
@@ -491,7 +370,7 @@
     const restartBtn = document.getElementById("restartBtn");
     const focusBtn = document.getElementById("focusBtn");
 
-    const box = 20; // 网格大小
+    const box = 20;
     const rows = canvas.height / box;
     const cols = canvas.width / box;
 
@@ -501,7 +380,7 @@
     let food;
     let score;
     let gameInterval;
-    let speed = 120; // 毫秒
+    let speed = 120;
 
     function initGame() {
       const startX = Math.floor(cols / 2);
@@ -532,7 +411,7 @@
       while (!valid) {
         x = Math.floor(Math.random() * cols);
         y = Math.floor(Math.random() * rows);
-        valid = !snake.some((segment) => segment.x === x && segment.y === y);
+        valid = !snake.some((s) => s.x === x && s.y === y);
       }
       food = { x, y };
     }
@@ -544,33 +423,25 @@
 
     function update() {
       direction = nextDirection;
-
       const head = { ...snake[0] };
+
       if (direction === "LEFT") head.x -= 1;
       if (direction === "RIGHT") head.x += 1;
       if (direction === "UP") head.y -= 1;
       if (direction === "DOWN") head.y += 1;
 
-      // 撞墙
-      if (
-        head.x < 0 ||
-        head.x >= cols ||
-        head.y < 0 ||
-        head.y >= rows
-      ) {
-        gameOver("撞到墙啦！");
+      if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows) {
+        gameOver("撞到边界，游戏结束。");
         return;
       }
 
-      // 撞到自己
-      if (snake.some((segment) => segment.x === head.x && segment.y === head.y)) {
-        gameOver("小心点，你咬到自己了！");
+      if (snake.some((s) => s.x === head.x && s.y === head.y)) {
+        gameOver("咬到自己了，游戏结束。");
         return;
       }
 
       snake.unshift(head);
 
-      // 吃到食物
       if (head.x === food.x && head.y === food.y) {
         score++;
         scoreLabel.textContent = "Score: " + score;
@@ -581,12 +452,10 @@
     }
 
     function draw() {
-      // 清屏背景
-      ctx.fillStyle = "#020617";
+      ctx.fillStyle = "#f2f2f7";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // 轻微网格线
-      ctx.strokeStyle = "rgba(148, 163, 184, 0.1)";
+      ctx.strokeStyle = "#e5e5ea";
       for (let i = 0; i <= cols; i++) {
         ctx.beginPath();
         ctx.moveTo(i * box + 0.5, 0);
@@ -600,50 +469,34 @@
         ctx.stroke();
       }
 
-      // 画食物
-      const gradientFood = ctx.createRadialGradient(
-        food.x * box + box / 2,
-        food.y * box + box / 2,
-        2,
-        food.x * box + box / 2,
-        food.y * box + box / 2,
-        box / 1.3
-      );
-      gradientFood.addColorStop(0, "#f97316");
-      gradientFood.addColorStop(1, "#b91c1c");
-      ctx.fillStyle = gradientFood;
+      // 食物
+      ctx.fillStyle = "#ff9500";
       ctx.fillRect(food.x * box + 2, food.y * box + 2, box - 4, box - 4);
 
-      // 画蛇
+      // 蛇
       snake.forEach((segment, index) => {
-        if (index === 0) {
-          // 头
-          const gradientHead = ctx.createRadialGradient(
-            segment.x * box + box / 2,
-            segment.y * box + box / 2,
-            2,
-            segment.x * box + box / 2,
-            segment.y * box + box / 2,
-            box / 1.4
-          );
-          gradientHead.addColorStop(0, "#38bdf8");
-          gradientHead.addColorStop(1, "#0f172a");
-          ctx.fillStyle = gradientHead;
-        } else {
-          ctx.fillStyle = "#0ea5e9";
-        }
-        ctx.fillRect(segment.x * box + 2, segment.y * box + 2, box - 4, box - 4);
+        ctx.fillStyle = index === 0 ? "#0071e3" : "#34c759";
+        ctx.fillRect(
+          segment.x * box + 2,
+          segment.y * box + 2,
+          box - 4,
+          box - 4
+        );
       });
     }
 
     function gameOver(msg) {
       clearInterval(gameInterval);
-      gameMessage.textContent = "Game Over · " + msg + " 点击“重新开始”再来一局。";
+      gameMessage.textContent = msg + " 点击“重新开始”再来一局。";
     }
 
     function handleKeydown(e) {
       const key = e.key.toLowerCase();
-      if (["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"].includes(key)) {
+      if (
+        ["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"].includes(
+          key
+        )
+      ) {
         e.preventDefault();
       }
 
@@ -653,7 +506,10 @@
         nextDirection = "DOWN";
       } else if ((key === "arrowleft" || key === "a") && direction !== "RIGHT") {
         nextDirection = "LEFT";
-      } else if ((key === "arrowright" || key === "d") && direction !== "LEFT") {
+      } else if (
+        (key === "arrowright" || key === "d") &&
+        direction !== "LEFT"
+      ) {
         nextDirection = "RIGHT";
       }
     }
@@ -662,16 +518,14 @@
     restartBtn.addEventListener("click", initGame);
 
     focusBtn.addEventListener("click", () => {
-      // 触发一次虚假的 focus 提示
-      gameMessage.textContent = "键盘已准备就绪，直接使用方向键或 W/A/S/D 控制即可。";
+      gameMessage.textContent = "直接在页面中使用方向键或 W/A/S/D 即可控制小蛇。";
       setTimeout(() => {
-        if (gameMessage.textContent.startsWith("键盘已准备")) {
+        if (gameMessage.textContent.startsWith("直接在页面")) {
           gameMessage.textContent = "";
         }
       }, 2500);
     });
 
-    // 初始化年份 & 游戏
     document.getElementById("year").textContent = new Date().getFullYear();
     initGame();
   </script>
